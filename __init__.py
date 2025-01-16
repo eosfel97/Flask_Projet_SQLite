@@ -92,14 +92,20 @@ def ReadNom(nom):
 
 
 
-@app.route('/consultation_bibi/')
-def ReadBDD_utilisateur():
+@app.route('/consultation_bibi')
+def consultation():
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Utilisateurs;')
-    data = cursor.fetchall()
+    cursor.execute('SELECT * FROM Livres')
+    livres = cursor.fetchall()
+    cursor.execute('SELECT * FROM Utilisateurs')
+    utilisateurs = cursor.fetchall()
+    cursor.execute('SELECT * FROM Emprunts')
+    emprunts = cursor.fetchall()
+    cursor.execute('SELECT * FROM Stocks')
+    stocks = cursor.fetchall()
     conn.close()
-    return render_template('read_data_bibi.html', data=data)
+    return render_template('read_data_bibi.html', livres=livres, utilisateurs=utilisateurs, emprunts=emprunts, stocks=stocks)
 
 
 
@@ -115,9 +121,36 @@ def Readfiche_utilisateur(user_id):
     return render_template('read_data_bibi.html', data=data)
 
 
+@app.route('/enregistrer_livre', methods=['POST'])
+def enregistrer_client():
+    nom = request.form['nom']
+    prenom = request.form['prenom']
+    # Connexion à la base de données
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
+    # Exécution de la requête SQL pour insérer un nouveau client
+    cursor.execute('INSERT INTO clients (created, nom, prenom, adresse) VALUES (?, ?, ?, ?)', (1002938, nom, prenom, "ICI"))
+    conn.commit()
+    conn.close()
+    return redirect('/consultation/')
 
+@app.route('/enregistrer_livre', methods=['POST'])
+def enregistrer_livre():
+    titre = request.form['titre']
+    auteur = request.form['auteur']
+    genre = request.form['genre']
+    annee_publication = request.form['annee_publication']
+    
+    conn = sqlite3.connect('bibliotheque.db')
+    cursor = conn.cursor()
 
+    cursor.execute('INSERT INTO Livres (titre, auteur, genre, annee_publication) VALUES (?, ?, ?, ?)',
+                   (titre, auteur, genre, annee_publication))
+
+    conn.commit()
+    conn.close()
+    return redirect('/consultation')
 
 
 

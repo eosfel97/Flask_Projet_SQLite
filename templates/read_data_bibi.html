@@ -1,31 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Consultation des Données de la Bibliothèque</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Liste des Utilisateurs</h1>
+    <h1>Consultation des Données de la Bibliothèque</h1>
+
+    <h2>Liste des Livres</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Genre</th>
+            <th>Année de Publication</th>
+            <th>Disponible</th>
+        </tr>
+        {% for livre in livres %}
+        <tr>
+            <td>{{ livre[0] }}</td>
+            <td>{{ livre[1] }}</td>
+            <td>{{ livre[2] }}</td>
+            <td>{{ livre[3] }}</td>
+            <td>{{ livre[4] }}</td>
+            <td>{{ 'Oui' if livre[5] == 1 else 'Non' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Liste des Utilisateurs</h2>
     <table>
         <tr>
             <th>ID</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Email</th>
-            <th>Date d'inscription</th>
+            <th>Date d'Inscription</th>
             <th>Statut</th>
         </tr>
-        {% for row in data %}
+        {% for utilisateur in utilisateurs %}
         <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-            <td>{{ row[5] }}</td>
+            <td>{{ utilisateur[0] }}</td>
+            <td>{{ utilisateur[1] }}</td>
+            <td>{{ utilisateur[2] }}</td>
+            <td>{{ utilisateur[3] }}</td>
+            <td>{{ utilisateur[4] }}</td>
+            <td>{{ utilisateur[5] }}</td>
         </tr>
         {% endfor %}
     </table>
+
+    <h2>Liste des Emprunts</h2>
+    <table>
+        <tr>
+            <th>ID Emprunt</th>
+            <th>ID Livre</th>
+            <th>ID Utilisateur</th>
+            <th>Date d'Emprunt</th>
+            <th>Date de Retour</th>
+        </tr>
+        {% for emprunt in emprunts %}
+        <tr>
+            <td>{{ emprunt[0] }}</td>
+            <td>{{ emprunt[1] }}</td>
+            <td>{{ emprunt[2] }}</td>
+            <td>{{ emprunt[3] }}</td>
+            <td>{{ emprunt[4] or 'Non retourné' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Liste des Stocks</h2>
+    <table>
+        <tr>
+            <th>ID Stock</th>
+            <th>ID Livre</th>
+            <th>Quantité</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[0] }}</td>
+            <td>{{ stock[1] }}</td>
+            <td>{{ stock[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </body>
 </html>
