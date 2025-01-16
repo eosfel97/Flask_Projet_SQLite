@@ -139,7 +139,7 @@ def enregistrer_livre():
                    (titre, auteur, genre, annee_publication))
     conn.commit()
     conn.close()
-    return redirect('/read_data_bibi.html')
+    return redirect('/db_bibi')
 
 @app.route('/supprimer_livre/<int:livre_id>', methods=['POST'])
 def supprimer_livre(livre_id):
