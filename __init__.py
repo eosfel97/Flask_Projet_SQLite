@@ -138,7 +138,7 @@ def enregistrer_livre():
                    (titre, auteur, genre, annee_publication))
     conn.commit()
     conn.close()
-    return redirect('/read_data.html')
+    return redirect('/read_data_bibi.html')
 
 
 
