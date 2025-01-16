@@ -108,8 +108,6 @@ def consultation():
     return render_template('read_data_bibi.html', livres=livres, utilisateurs=utilisateurs, emprunts=emprunts, stocks=stocks)
 
 
-
-
 @app.route('/fiche_utilisateur_bibi/<int:user_id>')  
 def Readfiche_utilisateur(user_id):
     conn = sqlite3.connect('bibliotheque.db')
@@ -120,20 +118,6 @@ def Readfiche_utilisateur(user_id):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data_bibi.html', data=data)
 
-
-@app.route('/enregistrer_livre', methods=['POST'])
-def enregistrer_client():
-    nom = request.form['nom']
-    prenom = request.form['prenom']
-    # Connexion à la base de données
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    # Exécution de la requête SQL pour insérer un nouveau client
-    cursor.execute('INSERT INTO clients (created, nom, prenom, adresse) VALUES (?, ?, ?, ?)', (1002938, nom, prenom, "ICI"))
-    conn.commit()
-    conn.close()
-    return redirect('/consultation/')
 
 @app.route('/enregistrer_livre', methods=['POST'])
 def enregistrer_livre():
