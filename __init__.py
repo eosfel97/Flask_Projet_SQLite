@@ -94,7 +94,7 @@ def ReadNom(nom):
 
 
 @app.route('/consultation_bibi/')
-def ReadBDD():
+def ReadBDD_utilisateur():
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM Utilisateurs;')
