@@ -131,6 +131,7 @@ def enregistrer_livre():
     auteur = request.form['auteur']
     genre = request.form['genre']
     annee_publication = request.form['annee_publication']
+    quantite = request.form['quantite']
     
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
@@ -138,10 +139,9 @@ def enregistrer_livre():
     cursor.execute('INSERT INTO Livres (titre, auteur, genre, annee_publication) VALUES (?, ?, ?, ?)',
                    (titre, auteur, genre, annee_publication))
 
-    
-    # Récupérer l'ID du livre nouvellement inséré
+
     livre_id = cursor.lastrowid
-        # Insérer le stock du livre dans la table Stocks
+
     cursor.execute('''
             INSERT INTO Stocks (id_livre, quantite)
             VALUES (?, ?)
