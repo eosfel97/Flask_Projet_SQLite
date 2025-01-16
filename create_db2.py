@@ -1,10 +1,10 @@
 import sqlite3
 
 # Connexion à la base de données SQLite
-connection = sqlite3.connect('bibliotheque.db')
+connection = sqlite3.connect('database.db')
 
 # Charger et exécuter le schéma
-with open('schema.sql') as f:
+with open('schema2.sql') as f:
     connection.executescript(f.read())
 
 cur = connection.cursor()
