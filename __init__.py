@@ -77,6 +77,7 @@ def enregistrer_client():
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
 
 
+
 @app.route('/fiche_nom/<string:nom>')
 def ReadNom(nom):
     if not est_authentifie():
@@ -90,7 +91,7 @@ def ReadNom(nom):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
-
+#######################################################################################
 
 @app.route('/db_bibi')
 def Db_bibi():
@@ -140,7 +141,14 @@ def enregistrer_livre():
     conn.close()
     return redirect('/read_data_bibi.html')
 
-
+@app.route('/supprimer_livre/<int:livre_id>', methods=['POST'])
+def supprimer_livre(livre_id):
+    conn = sqlite3.connect('bibliotheque.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM Livres WHERE id_livre = ?', (livre_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('db_bibi'))
 
 
 

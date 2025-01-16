@@ -31,6 +31,7 @@
             <th>Genre</th>
             <th>Année de Publication</th>
             <th>Disponible</th>
+            <th>Action</th>
         </tr>
         {% for livre in livres %}
         <tr>
@@ -40,6 +41,12 @@
             <td>{{ livre[3] }}</td>
             <td>{{ livre[4] }}</td>
             <td>{{ 'Oui' if livre[5] == 1 else 'Non' }}</td>
+            <td>
+                <!-- Formulaire pour supprimer un livre -->
+                <form method="POST" action="{{ url_for('supprimer_livre', livre_id=livre[0]) }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
