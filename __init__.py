@@ -133,7 +133,7 @@ def enregistrer_livre():
                    (titre, auteur, genre, annee_publication))
     conn.commit()
     conn.close()
-    return redirect('/consultation')
+    return redirect('/read_data.html')
 
 
 
