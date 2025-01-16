@@ -105,7 +105,7 @@ def ReadBDD_utilisateur():
 
 
 
-@app.route('/fiche_utilisateur_bibi/<int:user_id>')
+@app.route('/fiche_utilisateur_bibi/<int:user_id>')  
 def Readfiche_utilisateur(user_id):
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
