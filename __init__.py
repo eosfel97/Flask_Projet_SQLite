@@ -97,7 +97,7 @@ def ReadNom(nom):
 def Readfiche_utilisateur(post_id):
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM utilisateurs WHERE id = ?', (post_id,))
+    cursor.execute('SELECT * FROM utilisateurs WHERE id_utilisateur = ?', (post_id,))
     data = cursor.fetchall()
     conn.close()
     # Rendre le template HTML et transmettre les données
