@@ -119,6 +119,11 @@ def Readfiche_utilisateur(user_id):
     return render_template('read_data_bibi.html', utilisateurs=utilisateurs)
 
 
+
+@app.route('/enregistrer_livre', methods=['GET'])
+def formulaire_livre():
+    return render_template('enregistrer_livre.html')
+
 @app.route('/enregistrer_livre', methods=['POST'])
 def enregistrer_livre():
     titre = request.form['titre']
