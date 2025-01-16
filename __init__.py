@@ -99,7 +99,7 @@ def ReadBDD_utilisateur():
     cursor.execute('SELECT * FROM Utilisateurs;')
     data = cursor.fetchall()
     conn.close()
-    return render_template('read_data_bibi.html', utilisateurs=utilisateurs)
+    return render_template('read_data_bibi.html', data=data)
 
 
 
