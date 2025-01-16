@@ -148,7 +148,7 @@ def supprimer_livre(livre_id):
     cursor.execute('DELETE FROM Livres WHERE id_livre = ?', (livre_id,))
     conn.commit()
     conn.close()
-    return redirect(url_for('db_bibi'))
+    return redirect('/db_bibi')
 
 
 
