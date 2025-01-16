@@ -131,7 +131,6 @@ def enregistrer_livre():
 
     cursor.execute('INSERT INTO Livres (titre, auteur, genre, annee_publication) VALUES (?, ?, ?, ?)',
                    (titre, auteur, genre, annee_publication))
-
     conn.commit()
     conn.close()
     return redirect('/consultation')
