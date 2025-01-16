@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Liste des Utilisateurs</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Date d'inscription</th>
+            <th>Statut</th>
+        </tr>
+        {% for utilisateur in utilisateurs %}
+        <tr>
+            <td>{{ utilisateur.id_utilisateur }}</td>
+            <td>{{ utilisateur.nom }}</td>
+            <td>{{ utilisateur.prenom }}</td>
+            <td>{{ utilisateur.email }}</td>
+            <td>{{ utilisateur.date_inscription }}</td>
+            <td>{{ utilisateur.statut }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
