@@ -66,7 +66,6 @@ def formulaire_client():
 def enregistrer_client():
     nom = request.form['nom']
     prenom = request.form['prenom']
-
     # Connexion à la base de données
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -100,7 +99,7 @@ def ReadBDD_utilisateur():
     cursor.execute('SELECT * FROM Utilisateurs;')
     data = cursor.fetchall()
     conn.close()
-    return render_template('read_data_bibi.html', data=data)
+    return render_template('read_data_bibi.html', utilisateurs=utilisateurs)
 
 
 
