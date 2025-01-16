@@ -155,6 +155,7 @@ def enregistrer_livre():
 def supprimer_livre(livre_id):
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
+    cursor.execute('DELETE FROM Stocks WHERE id_livre = ?', (livre_id,))
     cursor.execute('DELETE FROM Livres WHERE id_livre = ?', (livre_id,))
     conn.commit()
     conn.close()
