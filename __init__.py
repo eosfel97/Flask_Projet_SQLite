@@ -137,6 +137,16 @@ def enregistrer_livre():
 
     cursor.execute('INSERT INTO Livres (titre, auteur, genre, annee_publication) VALUES (?, ?, ?, ?)',
                    (titre, auteur, genre, annee_publication))
+
+    
+    # Récupérer l'ID du livre nouvellement inséré
+    livre_id = cursor.lastrowid
+        # Insérer le stock du livre dans la table Stocks
+    cursor.execute('''
+            INSERT INTO Stocks (id_livre, quantite)
+            VALUES (?, ?)
+        ''', (livre_id, quantite))
+
     conn.commit()
     conn.close()
     return redirect('/db_bibi')
