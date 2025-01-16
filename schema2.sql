@@ -1,40 +1,39 @@
 -- Table des livres
-CREATE TABLE Livres (
-    id_livre INT PRIMARY KEY AUTO_INCREMENT,  -- Identifiant unique du livre
-    titre VARCHAR(255) NOT NULL,              -- Titre du livre
-    auteur VARCHAR(255),                      -- Auteur du livre
-    genre VARCHAR(100),                       -- Genre du livre
-    annee_publication INT,                    -- Année de publication
-    disponible BOOLEAN DEFAULT TRUE           -- Indique si le livre est disponible (par défaut, disponible)
+CREATE TABLE IF NOT EXISTS Livres (
+    id_livre INTEGER PRIMARY KEY AUTOINCREMENT,
+    titre TEXT NOT NULL,
+    auteur TEXT,
+    genre TEXT,
+    annee_publication INTEGER,
+    disponible BOOLEAN DEFAULT 1
 );
 
 -- Table des utilisateurs
-CREATE TABLE Utilisateurs (
-    id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,  -- Identifiant unique de l'utilisateur
-    nom VARCHAR(255) NOT NULL,                      -- Nom de l'utilisateur
-    prenom VARCHAR(255),                            -- Prénom de l'utilisateur
-    email VARCHAR(255) UNIQUE NOT NULL,             -- Email de l'utilisateur, unique
-    date_inscription DATE,                          -- Date d'inscription de l'utilisateur
-    statut ENUM('actif', 'inactif') DEFAULT 'actif' -- Statut de l'utilisateur (actif ou inactif)
+CREATE TABLE IF NOT EXISTS Utilisateurs (
+    id_utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prenom TEXT,
+    email TEXT UNIQUE NOT NULL,
+    date_inscription DATE,
+    statut TEXT CHECK(statut IN ('actif', 'inactif')) DEFAULT 'actif'
 );
 
 -- Table des emprunts
-CREATE TABLE Emprunts (
-    id_emprunt INT PRIMARY KEY AUTO_INCREMENT,  -- Identifiant unique de l'emprunt
-    id_livre INT,                               -- Identifiant du livre emprunté
-    id_utilisateur INT,                         -- Identifiant de l'utilisateur ayant emprunté le livre
-    date_emprunt DATE NOT NULL,                  -- Date d'emprunt
-    date_retour DATE,                            -- Date de retour prévue ou réelle
-    FOREIGN KEY (id_livre) REFERENCES Livres(id_livre) ON DELETE CASCADE,  -- Clé étrangère vers la table des livres
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id_utilisateur) ON DELETE CASCADE,  -- Clé étrangère vers la table des utilisateurs
-    CONSTRAINT chk_emprunt UNIQUE (id_livre, id_utilisateur)  -- Empêche un livre d'être emprunté par le même utilisateur plusieurs fois en même temps
+CREATE TABLE IF NOT EXISTS Emprunts (
+    id_emprunt INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_livre INTEGER,
+    id_utilisateur INTEGER,
+    date_emprunt DATE NOT NULL,
+    date_retour DATE,
+    FOREIGN KEY (id_livre) REFERENCES Livres(id_livre) ON DELETE CASCADE,
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id_utilisateur) ON DELETE CASCADE,
+    UNIQUE(id_livre, id_utilisateur)
 );
 
--- Table des stocks (Gestion de la quantité de chaque livre)
-CREATE TABLE Stocks (
-    id_stock INT PRIMARY KEY AUTO_INCREMENT,   -- Identifiant unique du stock
-    id_livre INT,                               -- Identifiant du livre
-    quantite INT NOT NULL,                      -- Quantité disponible du livre
-    FOREIGN KEY (id_livre) REFERENCES Livres(id_livre) ON DELETE CASCADE  -- Clé étrangère vers la table des livres
+-- Table des stocks
+CREATE TABLE IF NOT EXISTS Stocks (
+    id_stock INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_livre INTEGER,
+    quantite INTEGER NOT NULL,
+    FOREIGN KEY (id_livre) REFERENCES Livres(id_livre) ON DELETE CASCADE
 );
-
