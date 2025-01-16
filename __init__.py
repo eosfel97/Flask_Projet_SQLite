@@ -92,8 +92,8 @@ def ReadNom(nom):
 
 
 
-@app.route('/consultation_bibi')
-def consultation():
+@app.route('/db_bibi')
+def Db_bibi():
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM Livres')
