@@ -113,10 +113,10 @@ def Readfiche_utilisateur(user_id):
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM Utilisateurs WHERE id_utilisateur = ?', (user_id,))
-    data = cursor.fetchall()
+    utilisateurs = cursor.fetchall()
     conn.close()
     # Rendre le template HTML et transmettre les données
-    return render_template('read_data_bibi.html', data=data)
+    return render_template('read_data_bibi.html', utilisateurs=utilisateurs)
 
 
 @app.route('/enregistrer_livre', methods=['POST'])
