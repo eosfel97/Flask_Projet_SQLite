@@ -112,7 +112,7 @@ def Readfiche_utilisateur(user_id):
     data = cursor.fetchall()
     conn.close()
     # Rendre le template HTML et transmettre les données
-    return render_template('read_data_bibi.html', utilisateurs=utilisateurs)
+    return render_template('read_data_bibi.html', data=data)
 
 
 
