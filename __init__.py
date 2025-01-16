@@ -93,11 +93,11 @@ def ReadNom(nom):
 
 
 
-@app.route('/fiche_utilisateur_bibi/<int:post_id>')
-def Readfiche_utilisateur(post_id):
+@app.route('/fiche_utilisateur_bibi/<int:user_id>')
+def Readfiche_utilisateur(user_id):
     conn = sqlite3.connect('bibliotheque.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM Utilisateurs WHERE id_utilisateur = ?', (post_id,))
+    cursor.execute('SELECT * FROM Utilisateurs WHERE id_utilisateur = ?', (user_id,))
     data = cursor.fetchall()
     conn.close()
     # Rendre le template HTML et transmettre les données
