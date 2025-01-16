@@ -152,8 +152,22 @@ def supprimer_livre(livre_id):
 
 
 
+@app.route('/recherche_livre', methods=['GET'])
+def recherche_livre():
+    titre_recherche = request.args.get('titre') 
 
+    conn = sqlite3.connect('bibliotheque.db')
+    cursor = conn.cursor()
 
+    if titre_recherche:
+        cursor.execute("SELECT titre, auteur, genre, annee_publication, disponible FROM Livres WHERE titre LIKE ?", ('%' + titre_recherche + '%',))
+    else:
+        cursor.execute("SELECT titre, auteur, genre, annee_publication, disponible FROM Livres")
+
+    livres = cursor.fetchall()
+    conn.close()
+
+    return render_template('disponiblilité.html', livres=livres)
 
 
 

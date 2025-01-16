@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation des Livres</title>
+</head>
+<body>
+    <h1>Liste des Livres</h1>
+
+    <!-- Formulaire de recherche -->
+    <form method="GET" action="{{ url_for('recherche_livre') }}">
+        <label for="titre">Rechercher un Livre par Titre :</label>
+        <input type="text" id="titre" name="titre" placeholder="Entrez le titre" required>
+        <button type="submit">Rechercher</button>
+    </form>
+    <br>
+
+    <!-- Table des livres -->
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Année de Publication</th>
+            <th>Disponible</th>
+        </tr>
+        {% for livre in livres %}
+        <tr>
+            <td>{{ livre[1] }}</td> <!-- Titre du livre -->
+            <td>{{ livre[2] }}</td> <!-- Auteur -->
+            <td>{{ livre[4] }}</td> <!-- Année de publication -->
+            <td>
+                {% if livre[5] == 1 %}
+                    Disponible
+                {% else %}
+                    Emprunté
+                {% endif %}
+            </td> <!-- Statut de disponibilité -->
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
